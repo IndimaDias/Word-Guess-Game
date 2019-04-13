@@ -48,8 +48,8 @@ function generateWord(){
                      "Basilisk","Death Eater","Diagon Alley","Dumbledore","Firebolt","Goblet of Fire","Golden Snitch","Hermione","Ron Weasley"];
 
     compChoise = "";
-                     // compChoise = wordsArray[Math.floor(Math.random()*wordsArray.length)]; 
-    compChoise ="FIRE"
+    compChoise = wordsArray[Math.floor(Math.random()*wordsArray.length)]; 
+    // compChoise ="FIRE"
     compWord = [];
     console.log(compChoise);     
     
@@ -122,19 +122,8 @@ function validateChar(elementId){
 function validateTurns(){
     debugger;
     if (maxTurns === 0 ){
-        var audio = new Audio();
-        audio.src = 'http://soundfxcenter.com/movies/harry-potter/8d82b5_Harry_Potter_Expelliarmus_Sound_Effect.mp3';
-        console.log(audio.src);
-        audio.play();
-        var confirmPlay = confirm("You lost! Do you want to play again");
-
-        if (confirmPlay == true) {
-            initiateGame();
-            console.log("Try again");
-        } 
-        else {
-            endGame();
-        }
+        displayAlert("L");
+        
     }
     else {
         guessCompletWord();
@@ -177,20 +166,53 @@ function guessCompletWord(){
       displayAlert("W");
     } 
 }
-    
+
+/*************************************function to display alert based on user winning or losing******************** */
 function displayAlert(optionId) {
-    if (optionId = 'W'){
-        var divAlert = document.getElementById("modal");
-        divAlert.style.display = "block";
-
-        var alertText = document.getElementById("alertId");
-        alertText.textContent = "You Won!!!!!!!, Do you want play again?";
-
-        var alterImage= document.getElementById("alertImg");
-        alterImage.src = "https://s4.scoopwhoop.com/anj/sw/7543a1cb-193f-4745-9daf-4e607e806259.jpg";
     
+    var audioClip = new Audio;
+    var alterImage= document.getElementById("alertImg");
+    var alertText = document.getElementById("alertId");
+    var alertContect ;
+    var imgSrc;
+    var audioSrc;
+
+
+    if (optionId === 'W'){ // alert when user wins
+    
+            alertContect = "Congratulations!!!!! You won, Do you want to play again?";
+            imgSrc = "https://s4.scoopwhoop.com/anj/sw/7543a1cb-193f-4745-9daf-4e607e806259.jpg";
+            audioSrc = 'http://soundfxcenter.com/movies/harry-potter/8d82b5_Harry_Potter_Lumos_Maxima_Sound_Effect.mp3';
+
         //  alert("Word Complete");
     }
+    else if (optionId === "L"){ // alert when user lose
+        
+        alertContect = "You Lose, Do you want to play again?";
+        imgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmuSGPM05ifu7VU_tXOGPt2WD8xxJGI7hxNAwTcfFS7EVKFpDb";
+        audioSrc = 'http://soundfxcenter.com/movies/harry-potter/8d82b5_HP_Bellatrix_Lestrange_Avada_Kedavra_Sound_Effect.mp3';
+    }
+    else if(optionId === "E"){ //alert when user decided to quit game
+        alertContect = "Game Over !!!!!!!";
+        imgSrc = "";
+        audioSrc = "";
+        alterImage.style.display = 'none';
+
+        var alertBtnYes = document.getElementById("btnYes");
+        alertBtnYes.style.display = "none";
+    
+        var alertBtnNo = document.getElementById("btnNo");
+        alertBtnNo.style.display = "none";
+
+    }
+
+    alertText.textContent = alertContect;        
+    alterImage.src = imgSrc;
+    audioClip.src = audioSrc;
+    audioClip.play();
+
+    var divAlert = document.getElementById("modal");
+    divAlert.style.display = "block";
 }
 
 /**********************************************function onclik of yes button in the alert************************************ */
@@ -201,17 +223,21 @@ function yesClick(){
 
 }
 
+/**************************************************Function onclick of No button in the alert********************* */
 function noClick(){
     var divAlert = document.getElementById("modal");
     divAlert.style.display = "none";
     endGame();
 }
 
+/**********************************function ending game************************************************************ */
 function endGame(){
-    alert ("Bye Bye");
     var btnClass = document.getElementsByClassName("btnKey");
 
     for (var i = 0; i < btnClass.length; i++) {
         btnClass[i].disabled = true;
     }
+
+    displayAlert("E");
 }
+

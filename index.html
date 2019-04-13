@@ -11,15 +11,20 @@
 
     <body>
         <section id="mainBody">
+
+            <!--This is the section is for popup alert, it statys hidden till called -->
             <div class = "alertModal" id = "modal">
                 <div class = "modal-header">
                     <img id = "alertImg" src="">
-                    <h2 id = "alertId">
-                    </h2>
-                    <button type = "button" class = "controlButton" id = "btnYes" onclick="yesClick()"> Yes </button>
-                    <button type = "button" class = "controlButton" id = "btnNo" onclick="noClick()"> No </button> 
+                    <h2 id = "alertId"></h2>
+                    <div id = "divBtnAlert">
+                        <button type = "button" class = "controlButton" id = "btnYes" onclick="yesClick()"> Yes </button>
+                        <button type = "button" class = "controlButton" id = "btnNo" onclick="noClick()"> No </button>
+                    </div>
+                     
                 </div>
             </div>
+            <!------------------------------------------------------------------------------------------>
 
             <header id = "header1" class="headerFont">
                 <div id = "heading1"> <!--Section for main heading-->
