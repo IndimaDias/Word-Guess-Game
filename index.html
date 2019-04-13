@@ -11,6 +11,16 @@
 
     <body>
         <section id="mainBody">
+            <div class = "alertModal" id = "modal">
+                <div class = "modal-header">
+                    <img id = "alertImg" src="">
+                    <h2 id = "alertId">
+                    </h2>
+                    <button type = "button" class = "controlButton" id = "btnYes" onclick="yesClick()"> Yes </button>
+                    <button type = "button" class = "controlButton" id = "btnNo" onclick="noClick()"> No </button> 
+                </div>
+            </div>
+
             <header id = "header1" class="headerFont">
                 <div id = "heading1"> <!--Section for main heading-->
                     <h1 >
@@ -32,18 +42,16 @@
             <div id="divControl"> <!--Row with buttons-->
                 <div id="divButton">
                      <button type="button" class="controlButton" onclick="createButtons(); generateWord();">Start! </button>
-                     <button type="button" class="controlButton">Reset</button>
+                     <button type="button" class="controlButton" onclick="initiateGame();">Reset</button>
                 </div>
-                <p id='tries'>Tries : <span id="textTri">0</span></p>
+                <p id='tries'>Tries : <span id="textTri">10</span></p>
             </div>
 
             <div id= "wordGen"> <!--Display area for the generated word-->
                 <p id="wordGuess"></p>
             </div>
 
-                   <!-- <script>
-                       createButtons();   
-                   </script> -->
+
                      
 
 
