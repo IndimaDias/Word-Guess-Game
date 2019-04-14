@@ -2,7 +2,9 @@ var charLength = 0;
 
 var compWord = []; // array to save the computer generate word
 
-var compChoise ="" ; // computer generated word
+var compChoise ="" ; // computer generated word converted to uppercase
+
+var generatedWord = ""; // computer generated word
 
 var maxTurns = 10; //maximum no of turns allowed
 
@@ -44,14 +46,26 @@ function createButtons(){
 function generateWord(){
 
     
-    var wordsArray=["quidditch","muggle","Harry Potter","Polyjuice","Azkaban","Patronus","Hogwarts","Gryffindor","Slytherin","Ravenclaw","Hufflepuff",
+    var wordsArray = ["Quidditch","Muggle","Harry Potter","Polyjuice","Azkaban","Patronus","Hogwarts","Gryffindor","Slytherin","Ravenclaw","Hufflepuff",
                      "Basilisk","Death Eater","Diagon Alley","Dumbledore","Firebolt","Goblet of Fire","Golden Snitch","Hermione","Ron Weasley"];
 
+    var hintsArray = ["Fly to race", "No magic", "It's all about him" , "Change your looks", 
+                      "A place you don't want to be","Think of your happiest memory", 
+                      "A Scottish castle", "Guarded by the Fat Lady","A long, stone room under the Great Lake",
+                      "Founder with a diadem","golded cup", "Look into my eyes","devoted to You-Know-Who",
+                      "School supplies", "Order of the Phoenix", "Best to seek","Triwizard tournament","Like a small brid",
+                      "When in doubt, go to the library ", "Best Chess"];                 
+
     compChoise = "";
-    compChoise = wordsArray[Math.floor(Math.random()*wordsArray.length)]; 
-    // compChoise ="FIRE"
+    generatedWord = wordsArray[Math.floor(Math.random()*wordsArray.length)];
+
+    compChoise = generatedWord.toUpperCase(); 
+
+    wordHint   = hintsArray[wordsArray.indexOf(generatedWord)];
+    
     compWord = [];
-    console.log(compChoise);     
+    console.log(compChoise);  
+    console.log(wordHint);   
     
     // length of the generated word
     charLength = compChoise.length;
@@ -75,9 +89,11 @@ function generateWord(){
     
     var divWord = document.getElementById("wordGen"); // element id for div wordGen
     var pWordGuess = document.getElementById("wordGuess"); //element id for pragraph wordGuess
+    var toolTipText = document.getElementById("toolTip");
     console.log(printWord);
     
     pWordGuess.textContent = printWord;
+    toolTipText.textContent = wordHint;
     
 } //end of function generateWord
 
@@ -112,7 +128,7 @@ function validateChar(elementId){
       
       pWordGuess.textContent = modifiedWord;
   }
-  buttonId.disabled = true;
+  buttonId.disabled = true;00
 
   var turnValidate = validateTurns();
   
@@ -120,7 +136,7 @@ function validateChar(elementId){
 
 /***************************************funtion to validate the no of available turns****************************** */
 function validateTurns(){
-    debugger;
+
     if (maxTurns === 0 ){
         displayAlert("L");
         
@@ -151,7 +167,7 @@ function guessCompletWord(){
     var isCompleted = true;
 
     console.log(compChoiseArray);
-    debugger;
+    
     if(compChoiseArray.length == compWord.length){
         for(var i = 0; i < compChoiseArray.length; i++ ){
             if (compChoiseArray[i] !== compWord[i]) {
@@ -182,17 +198,18 @@ function displayAlert(optionId) {
     
             alertContect = "Congratulations!!!!! You won, Do you want to play again?";
             imgSrc = "https://s4.scoopwhoop.com/anj/sw/7543a1cb-193f-4745-9daf-4e607e806259.jpg";
-            audioSrc = 'http://soundfxcenter.com/movies/harry-potter/8d82b5_Harry_Potter_Lumos_Maxima_Sound_Effect.mp3';
+            audioSrc = 'http://www.moviesoundclips.net/download.php?id=3506&ft=mp3';
 
         //  alert("Word Complete");
     }
     else if (optionId === "L"){ // alert when user lose
         
-        alertContect = "You Lose, Do you want to play again?";
+        alertContect = "It's " + generatedWord + "..... You Lose, Do you want to play again?";
         imgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmuSGPM05ifu7VU_tXOGPt2WD8xxJGI7hxNAwTcfFS7EVKFpDb";
-        audioSrc = 'http://soundfxcenter.com/movies/harry-potter/8d82b5_HP_Bellatrix_Lestrange_Avada_Kedavra_Sound_Effect.mp3';
+        audioSrc = 'http://www.moviesoundclips.net/download.php?id=3505&ft=mp3';
     }
     else if(optionId === "E"){ //alert when user decided to quit game
+        debugger;
         alertContect = "Game Over !!!!!!!";
         imgSrc = "";
         audioSrc = "";
@@ -209,7 +226,10 @@ function displayAlert(optionId) {
     alertText.textContent = alertContect;        
     alterImage.src = imgSrc;
     audioClip.src = audioSrc;
-    audioClip.play();
+    if (audioSrc !== ""){
+        audioClip.play();
+    }
+    
 
     var divAlert = document.getElementById("modal");
     divAlert.style.display = "block";
@@ -225,6 +245,7 @@ function yesClick(){
 
 /**************************************************Function onclick of No button in the alert********************* */
 function noClick(){
+    debugger;
     var divAlert = document.getElementById("modal");
     divAlert.style.display = "none";
     endGame();
@@ -232,6 +253,7 @@ function noClick(){
 
 /**********************************function ending game************************************************************ */
 function endGame(){
+    debugger;
     var btnClass = document.getElementsByClassName("btnKey");
 
     for (var i = 0; i < btnClass.length; i++) {
