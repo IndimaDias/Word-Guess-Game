@@ -10,6 +10,10 @@ var maxTurns = 10; //maximum no of turns allowed
 
 /***********************************function creating the buttons with alphabet characters********************/
 function createButtons(){
+
+    // This function will create the letter button pallate when start button or play again button is pressed 
+
+    // Array with alphabet letter
     var str = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
     var grid = document.createElement('div');
@@ -18,22 +22,27 @@ function createButtons(){
     for(var i=0; i<str.length;i++){
 
         if (i==21 || i == 26 ){
+            // create a p tag for empty spaces to center the buttons in the last line 
             var txt = document.createElement('p');
             grid.appendChild(txt);
         }
+
+        // creae a button for each letter
         var btn = document.createElement("BUTTON");
-        //  debugger;
+       
+        // create button id as btnA
         var btnId = "btn" + str[i];
 
+        // set button attributes
         btn.setAttribute("id",btnId);
         btn.setAttribute("value",str[i]);
         btn.setAttribute("text",str[i]);
         btn.innerHTML =str[i];
-        // btn.setAttribute('onclick', "validateChar('" + btn.innerHTML + "')");
+       
         btn.setAttribute('onclick',"validateChar( '" + btnId + "')");
         btn.className="btnKey";
         grid.appendChild(btn);
-        // document.body.appendChild(btn);
+       
     }
 
     document.body.appendChild(grid);
@@ -57,22 +66,27 @@ function generateWord(){
                       "When in doubt, go to the library ", "Best Chess"];                 
 
     compChoise = "";
+
+    // generate random word from array 
     generatedWord = wordsArray[Math.floor(Math.random()*wordsArray.length)];
 
+    // trun word to upper case
     compChoise = generatedWord.toUpperCase(); 
 
+    // get the hint relevant for the word from hints array 
     wordHint   = hintsArray[wordsArray.indexOf(generatedWord)];
     
     compWord = [];
-    console.log(compChoise);  
-    console.log(wordHint);   
+   
     
     // length of the generated word
     charLength = compChoise.length;
     
+    // assign word to an array 
     for (var i = 0; i < compChoise.length; i++){
         var x = compChoise.charAt(i);
 
+        // if it's more than one word , check for spaces 
         if (x === ' '){
             compWord[i] = '\xA0';  //add the unicode character instead of space
         }
@@ -99,23 +113,22 @@ function generateWord(){
 
 /*******************************function to validate the user entered character*********************************** */
 function validateChar(elementId){
-    // debugger;
+    
 
    var buttonId = document.getElementById(elementId) ;
-   var useChoise = buttonId.innerHTML;
-
-   console.log(useChoise);
+   var useChoise = buttonId.innerHTML;   
    var letterFound = false;
 
-   console.log(useChoise);
-
+   
+// check if user selected letter is found in the array of generated word
    for (var i = 0 ; i < compChoise.length; i++) {
        if (compChoise[i] === useChoise){
            letterFound = true;
            compWord[i] = useChoise;
        }
    }
-// debugger;
+
+//    if incorrect letter selected , reduce no of turns
   if(letterFound === false){
    maxTurns = maxTurns - 1;
    var noOfTurns = document.getElementById("textTri");
@@ -124,11 +137,11 @@ function validateChar(elementId){
   else {
       var modifiedWord = compWord.join(' ');
       var pWordGuess = document.getElementById("wordGuess"); //element id for pragraph wordGuess
-      console.log(modifiedWord);
+     
       
       pWordGuess.textContent = modifiedWord;
   }
-  buttonId.disabled = true;00
+  buttonId.disabled = true;
 
   var turnValidate = validateTurns();
   
@@ -137,16 +150,19 @@ function validateChar(elementId){
 /***************************************funtion to validate the no of available turns****************************** */
 function validateTurns(){
 
-    if (maxTurns === 0 ){
+    
+    if (maxTurns === 0 ){ // if allowed truns reach 0 
         displayAlert("L");
         
     }
     else {
+        // check if word is completed
         guessCompletWord();
     }
 } //end of fucntion validateTurns
 
 /******************************************function to reinitiate game********************* */
+
 
 function initiateGame(){
     var btnClass = document.getElementsByClassName("btnKey");
