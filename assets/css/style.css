@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=UnifrakturMaguntia');
 
+body,html{
+    height: 100%;
+}
 /* Changes the style of the body */
 body{background-image: url("../images/Photo-Harry-Potter-Wallpapers.jpg");
-     background-size: cover;}
+     background-size: cover;
+     background-repeat: no-repeat}
 
 .headerFont{
     font-family: 'UnifrakturMaguntia', cursive;
@@ -86,7 +90,7 @@ body{background-image: url("../images/Photo-Harry-Potter-Wallpapers.jpg");
 /* style for the alphabet buttons */
 .btnKey{
     font-size: 14px;
-    padding: 10px 15px; 
+    padding: 10px 20px 10px 10px; 
     border-radius: 20px;
     background-color: gold;
 }

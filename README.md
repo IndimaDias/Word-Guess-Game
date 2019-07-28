@@ -4,7 +4,7 @@
 
 A traditional hangman style web app developed based on the fantasy series "Harry Potter".
 
-### Instrunctions
+### Instructions
  * Press the play button when the app is loaded.
  * Guess the automatically generated word by clicking the letters.
  * Each word is generated with a hint. Hint will be populated as a tool tip for the word
@@ -52,6 +52,18 @@ A traditional hangman style web app developed based on the fantasy series "Harry
 
         This app is developed only using html, css and javascript. No external libraries are used. 
 
+###Technologies
+    * Javascript
+    * HTML
+    * CSS
+
+![Game Start](assets/images/startGame.png)    
+
+![Game Won](assets/images/GameWon.png)    
+
+![Game Lost](assets/images/GameLost.png)    
+
+![Game Help Time](assets/images/gameTip.png)    
 #### IT's a fun game to play and see how much you know about the series.
 
 ## This page is created and maintained by Indima Dias
